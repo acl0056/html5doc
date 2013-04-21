@@ -6,17 +6,19 @@
 	Properties:
 		name - A string name for this document. You must set the name property before saving.  You can also use this property to check whether to perform save or saveAs. If this his the same name as another document in the same store, it will save over that document.
 */
-/*	Function: Html5Doc([name]) 
+/*	Function: Html5Doc([name, store]) 
 	Html5Doc constructor.
 	
 	Parameters:
-		name - An optional argument for this document's name.
+		name - An optional string argument for this document's name.
+		store - An optional string argument for this document's store.
 */
 function Html5Doc() {
 	this.name = arguments[0]?arguments[0]:null;
+	this.store = arguments[1]?arguments[1]:null;
 }
 
-/*	Html5Doc.getDocument(name, store)
+/*	Function: Html5Doc.getDocument(name, store)
 	Retrieve a document from storage.
 	
 	Parameters:
@@ -45,7 +47,7 @@ Html5Doc.getDocument = function(name, store) {
     }
 };
 
-/*	Html5Doc.saveDocument(document [, store])
+/*	Function: Html5Doc.saveDocument(document [, store])
 	Save a document to a document store.
 	
 	Parameters:
@@ -77,7 +79,7 @@ Html5Doc.saveDocument = function(document) {
 	return true;
 };
 
-/*	Html5Doc.removeDocument(document)
+/*	Function: Html5Doc.removeDocument(document)
 	Remove a document from local storage.
 	
 	Parameters:
@@ -106,8 +108,11 @@ Html5Doc.removeDocument = function(document) {
 	return true;
 };
 
-/*	Html5Doc.keys(obj)
-	Get the keys of an object, using the native implementation if available. Simplified version from underscore, defined here to avoid dependencies.
+/*	Function: Html5Doc.keys(obj)
+	Get the keys of an object, using the native implementation if available. Similar to _.keys in underscore.js, but defined here to avoid dependencies.
+	
+	Parameters:
+		obj - A javascript object.
 	
 	Returns:
 		The object keys.
@@ -119,8 +124,8 @@ Html5Doc.keys = Object.keys || function(obj) {
     return keys;
 };
 
-/*	Html5Doc.getDocumentNamesForStore(store)
-	Get the name of all documents in a document store.
+/*	Function: Html5Doc.getDocumentNamesForStore(store)
+	Get the names of all documents in a document store.
 	
 	Parameters:
 		store - A string name of an object store.
