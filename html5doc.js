@@ -44,10 +44,11 @@ Html5Doc.getDocument = function(name, store) {
 			return doc;
 		}
 		return undefined;
-    } catch(e){
-    	// Any exceptions caught here are supressed, because they are probably from compatibility issues and not implementation issues.
-	    return null;
-    }
+	}
+	catch(e) {
+		// Any exceptions caught here are supressed, because they are probably from compatibility issues and not implementation issues.
+		return null;
+	}
 };
 
 /*	Function: Html5Doc.saveDocument(document [, store])
@@ -74,11 +75,11 @@ Html5Doc.saveDocument = function(document) {
 		var documentStore = JSON.parse(localStorage.getItem(store)) || {};
 		documentStore[document.name] = document;
 		localStorage.setItem(store, JSON.stringify(documentStore));
-    }
-    catch(e) {
-    	// Any exceptions caught here are supressed, because they are probably from compatibility issues and not implementation issues.
-        return false;
-    }
+	}
+	catch(e) {
+		// Any exceptions caught here are supressed, because they are probably from compatibility issues and not implementation issues.
+		return false;
+	}
 	return true;
 };
 
@@ -103,11 +104,11 @@ Html5Doc.removeDocument = function(document) {
 		var documentStore = JSON.parse(localStorage.getItem(document.store));
 		delete documentStore[document.name];
 		localStorage.setItem(document.store, JSON.stringify(documentStore));
-    }
-    catch(e) {
-    	// Any exceptions caught here are supressed, because they are probably from compatibility issues and not implementation issues.
-        return false;
-    }
+	}
+	catch(e) {
+		// Any exceptions caught here are supressed, because they are probably from compatibility issues and not implementation issues.
+		return false;
+	}
 	return true;
 };
 
@@ -140,11 +141,11 @@ Html5Doc.getDocumentNamesForStore = function(store){
 	try {
 		var documentStore = JSON.parse(localStorage.getItem(store)) || {};
 		return Html5Doc.keys(documentStore);
-    }
-    catch(e) {
-    	// Any exceptions caught here are supressed, because they are probably from compatibility issues and not implementation issues.
-        return null;
-    }
+	}
+	catch(e) {
+		// Any exceptions caught here are supressed, because they are probably from compatibility issues and not implementation issues.
+		return null;
+	}
 };
 
 /*	Function: Html5Doc.detect([debug])
@@ -169,13 +170,13 @@ Html5Doc.detect = function() {
 	// Test for localStorage
 	var tester = "localStorage";
 	try {
-        localStorage.setItem(tester, tester);
-        localStorage.removeItem(tester);
-        return true;
-    }
-    catch(e) {
-    	if (debug)
-    		console.log("Failed localStorage test.");
-        return false;
-    }
+		localStorage.setItem(tester, tester);
+		localStorage.removeItem(tester);
+		return true;
+	}
+	catch(e) {
+		if (debug)
+			console.log("Failed localStorage test.");
+		return false;
+	}
 };
