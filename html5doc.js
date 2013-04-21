@@ -38,8 +38,11 @@ Html5Doc.getDocument = function(name, store) {
 		
 	try {
 		var documentStore = JSON.parse(localStorage.getItem(store));
-		if (documentStore)
-			return documentStore[name];
+		if (documentStore) {
+			var doc = documentStore[name];
+			doc.__proto__ = Html5Doc.prototype;
+			return doc;
+		}
 		return undefined;
     } catch(e){
     	// Any exceptions caught here are supressed, because they are probably from compatibility issues and not implementation issues.
@@ -68,9 +71,9 @@ Html5Doc.saveDocument = function(document) {
 		
 	document.store = store;
 	try {
-		var documentStore = JSON.parse(localStorage.getItem(store));
+		var documentStore = JSON.parse(localStorage.getItem(store)) || {};
 		documentStore[document.name] = document;
-		localStorage.setItem('preferences', JSON.stringify(documentStore));
+		localStorage.setItem(store, JSON.stringify(documentStore));
     }
     catch(e) {
     	// Any exceptions caught here are supressed, because they are probably from compatibility issues and not implementation issues.
@@ -97,9 +100,9 @@ Html5Doc.removeDocument = function(document) {
 		throw {name:"Error",message:"store is required to remove."};
 	
 	try {
-		var documentStore = JSON.parse(localStorage.getItem(store));
+		var documentStore = JSON.parse(localStorage.getItem(document.store));
 		delete documentStore[document.name];
-		localStorage.setItem(store, JSON.stringify(documentStore));
+		localStorage.setItem(document.store, JSON.stringify(documentStore));
     }
     catch(e) {
     	// Any exceptions caught here are supressed, because they are probably from compatibility issues and not implementation issues.
@@ -135,7 +138,7 @@ Html5Doc.keys = Object.keys || function(obj) {
 */
 Html5Doc.getDocumentNamesForStore = function(store){
 	try {
-		var documentStore = JSON.parse(localStorage.getItem(store));
+		var documentStore = JSON.parse(localStorage.getItem(store)) || {};
 		return Html5Doc.keys(documentStore);
     }
     catch(e) {
