@@ -1,6 +1,6 @@
 html5doc
 ========
 
-Html5Doc lets you store and retrieve document objects from local storage.  All work is done in class methods, because an instance IS the document that is saved to local storage.  Any properties you give to the document must be serializable into a JSON string.  Html5Doc uses a document store name, which allows you to easily group your documents by type, user, or whatever your implementation requires.
+Html5Doc lets you store and retrieve document objects from local storage.  Of course, this is something that is fairly easy to do already, so why would you use Html5Docs? Firstly, it provides safety from compatibility issues by catching exceptions and returning boolean success values.  It also provides a separate test method for browser compatibility.
 
 [View the documentation.](http://photogroup.lxalumni.org/html5doc/documentation)
